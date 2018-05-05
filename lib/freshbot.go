@@ -1,10 +1,11 @@
 package lib
 
 import (
-	"github.com/OwnLocal/go-freshbooks"
 	"log"
 	"os"
 	"sync"
+
+	"github.com/OwnLocal/go-freshbooks"
 )
 
 type ProjectHours struct {

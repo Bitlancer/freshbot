@@ -4,13 +4,14 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
-	"github.com/aws/aws-lambda-go/events"
-	"github.com/aws/aws-sdk-go/aws/session"
-	"github.com/aws/aws-sdk-go/service/kms"
 	"log"
 	"net/url"
 	"sort"
 	"time"
+
+	"github.com/aws/aws-lambda-go/events"
+	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/kms"
 )
 
 func decryptApiKey() string {
@@ -61,19 +62,19 @@ func HandleRequest(request events.APIGatewayProxyRequest) (events.APIGatewayProx
 	}
 
 	attachments := map[string]interface{}{
-		"fallback": "Freshbot",
-		"color": "#36a64f",
-		"title": "Hours Worked on Active Projects",
-		"title_link": fmt.Sprintf("https://%s.freshbooks.com", FreshBooksOrganizationName()),
-		"fields": attachments_fields,
-		"footer": "FreshBooks API",
+		"fallback":    "Freshbot",
+		"color":       "#36a64f",
+		"title":       "Hours Worked on Active Projects",
+		"title_link":  fmt.Sprintf("https://%s.freshbooks.com", FreshBooksOrganizationName()),
+		"fields":      attachments_fields,
+		"footer":      "FreshBooks API",
 		"footer_icon": "https://www.freshbooks.com/favicon.ico",
-		"ts": time.Now().Unix(),
+		"ts":          time.Now().Unix(),
 	}
 
 	body := map[string]interface{}{
 		"response_type": "ephemeral",
-		"attachments": []interface{}{attachments},
+		"attachments":   []interface{}{attachments},
 	}
 
 	body_json, err := json.Marshal(body)
