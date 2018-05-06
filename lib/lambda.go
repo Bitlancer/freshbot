@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"math"
 	"net/url"
 	"sort"
 	"time"
@@ -53,9 +54,10 @@ func HandleRequest(request events.APIGatewayProxyRequest) (events.APIGatewayProx
 
 	attachments_fields := make([]map[string]string, 0)
 	for _, h := range hours {
+		hoursLeft := math.Max(0, h.Project.HourBudget-h.WorkedHours)
 		field := map[string]string{
 			"title": h.Project.Name,
-			"value": fmt.Sprintf("%.2f of %.2f hours", h.WorkedHours, h.Project.HourBudget),
+			"value": fmt.Sprintf("%.2f of %.2f hours", hoursLeft, h.Project.HourBudget),
 			"short": "true",
 		}
 		attachments_fields = append(attachments_fields, field)
@@ -64,7 +66,7 @@ func HandleRequest(request events.APIGatewayProxyRequest) (events.APIGatewayProx
 	attachments := map[string]interface{}{
 		"fallback":    "Freshbot",
 		"color":       "#36a64f",
-		"title":       "Hours Worked on Active Projects",
+		"title":       "Hours Left on Active Projects",
 		"title_link":  fmt.Sprintf("https://%s.freshbooks.com", FreshBooksOrganizationName()),
 		"fields":      attachments_fields,
 		"footer":      "FreshBooks API",
