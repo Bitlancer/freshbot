@@ -1,6 +1,6 @@
 # Freshbot
 
-Freshbot makes it easy to see how many hours your team has worked on active FreshBooks projects. It's a Slack bot that runs as an AWS Lambda function, making setup and maintenance easy.
+Freshbot makes it easy to see how many hours your team has left on active FreshBooks projects. It's a Slack bot that runs as an AWS Lambda function, making setup and maintenance easy.
 
 ![Sample Freshbot run](support/sample-run.png)
 
